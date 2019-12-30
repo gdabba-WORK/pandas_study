@@ -1,0 +1,85 @@
+# matplotlib와 pyqt를 연동한 코드
+# todo 공부하기
+import sys
+
+import matplotlib.pyplot as plt
+import numpy as np
+from PyQt5.QtWidgets import *
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+
+
+class MyWindow(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.initUI()
+
+        self.setLayout(self.layout)
+        self.setGeometry(200, 200, 800, 600)
+
+    def initUI(self):
+        self.fig = plt.Figure()
+        self.canvas = FigureCanvas(self.fig) # figure - canvas 연동
+
+        self.layout = QVBoxLayout()
+        self.layout.addWidget(self.canvas)
+
+        cb = QComboBox()
+        cb.addItem('Graph1')# matplotlib 한글 폰트 오류 문제 해결
+
+        cb.addItem('Graph2')
+        cb.activated[str].connect(self.onComboBoxChanged)
+        self.layout.addWidget(cb)
+
+        self.onComboBoxChanged(cb.currentText())
+
+    def onComboBoxChanged(self, text):
+        if text == 'Graph1':
+            self.doGraph1()
+        elif text == 'Graph2':
+            self.doGraph2()
+
+    def doGraph1(self):
+        x = np.arange(0, 10, 0.5)
+        y1 = np.sin(x)
+        y2 = np.cos(x)
+
+        self.fig.clear()
+
+        ax = self.fig.add_subplot(111) # fig를 1행 1칸으로 나누어 1칸안에 넣어줍니다
+        ax.plot(x, y1, label="sin(x)")
+        ax.plot(x, y2, label="cos(x)", linestyle="--")
+
+        ax.set_xlabel("x")
+        ax.set_xlabel("y")
+
+        ax.set_title("sin & cos")
+        ax.legend()
+        ax.grid()
+
+        self.canvas.draw()
+
+    def doGraph2(self):
+        x = np.arange(0, 20, 0.5)
+        y1 = np.sin(x)
+        y2 = np.cos(x)
+
+        self.fig.clear()
+
+        ax = self.fig.add_subplot(111)
+        ax.plot(x, y1, label="sin(x)")
+        ax.plot(x, y2, label="cos(x)", linestyle="--")
+
+        ax.set_xlabel("x")
+        ax.set_xlabel("y")
+
+        ax.set_title("sin & cos")
+        ax.legend()
+
+        self.canvas.draw()
+
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    window = MyWindow()
+    window.show()
+    app.exec_()
