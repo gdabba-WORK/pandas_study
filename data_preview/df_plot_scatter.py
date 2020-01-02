@@ -7,7 +7,7 @@ matplotlib.rcParams['font.family'] = 'NanumGothic'    # '맑은 고딕'으로 �
 matplotlib.rcParams['axes.unicode_minus'] = False
 
 # read_csv() 함수로 df 생성
-df = pd.read_csv('../data_preprocess/auto-mpg.csv')
+df = pd.read_csv('../data/auto-mpg.csv')
 
 # 열 이름을 지정
 df.columns = ['mpg', 'cylinders', 'displacement', 'horsepower',

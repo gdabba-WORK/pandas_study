@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-df = pd.read_csv("./auto-mpg.csv", header=None)
+df = pd.read_csv("../data/auto-mpg.csv", header=None)
 df.columns = ['mpg', 'cylinders', 'displacement', 'horsepower', 'weight',
               'acceleration', 'model year', 'origin', 'name']
 

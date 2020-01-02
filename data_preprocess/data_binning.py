@@ -4,7 +4,7 @@ import numpy as np
 pd.set_option('display.max_columns', 15)
 pd.set_option('display.width', 600)
 
-df = pd.read_csv("./auto-mpg.csv", header=None)
+df = pd.read_csv("../data/auto-mpg.csv", header=None)
 df.columns = ['mpg', 'cylinders', 'displacement', 'horsepower', 'weight',
               'acceleration', 'model year', 'origin', 'name']
 

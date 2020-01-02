@@ -31,9 +31,14 @@ sr_one = df_seoul.loc['경기도']
 print(type(sr_one.values))
 print(sr_one.head())
 
-# 한글 설정
-matplotlib.rcParams['font.family'] = 'NanumGothic'
-matplotlib.rcParams['axes.unicode_minus'] = False
+# 한글 설정(case1)
+# matplotlib.rcParams['font.family'] = 'NanumGothic'
+# matplotlib.rcParams['axes.unicode_minus'] = False
+
+# matplotlib 한글 폰트 오류 문제 해결(case2)
+font_path = '../data/malgun.ttf'
+font_name = font_manager.FontProperties(fname=font_path).get_name()
+rc('font', family=font_name)
 
 # x, y축 데이터를 plot 함수에 입력
 plt.plot(sr_one.index, sr_one.values)
@@ -52,11 +57,6 @@ plt.xlabel('기간')
 plt.ylabel('이동 인구수')
 # plt.show()
 
-# matplotlib 한글 폰트 오류 문제 해결
-# font_path = './malgun.ttf'
-# font_name = font_manager.FontProperties(fname=font_path).get_name()
-# rc('font', family=font_name)
-# todo 적용 방법 알아보기
 
 # 범례 표시
 plt.legend(labels=['서울 -> 경기'], loc='best')
